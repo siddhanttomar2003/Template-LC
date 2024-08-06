@@ -165,14 +165,31 @@ public:
         return true;
     }
 };
-
-/**
- * Your Trie object will be instantiated and called as such:
- * Trie* obj = new Trie();
- * obj->insert(word);
- * bool param_2 = obj->search(word);
- * bool param_3 = obj->startsWith(prefix);
- */
+void computeLPSArray(string& s, vector<int>& lps)
+{
+    int len = 0;
+    lps[0] = 0;
+    int i = 1;
+    int n=s.size();
+    while (i < n) {
+        if (s[i] == s[len]) {
+            len++;
+            lps[i] = len;
+            i++;
+        }
+        else 
+        {
+            if (len != 0) {
+                len = lps[len - 1];
+            }
+            else 
+            {
+                lps[i] = 0;
+                i++;
+            }
+        }
+    }
+}
 ll binomial_expo (ll a, ll b){
     ll ans=1;
     while(b){
